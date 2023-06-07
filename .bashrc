@@ -38,3 +38,9 @@ export FZF_DEFAULT_OPTS="--ansi"
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 
 complete -C /usr/bin/terraform terraform
+
+if grep -q NAME=\"Fedora /etc/os-release
+then
+    alias vi='vimx'
+    alias vim='vimx'
+fi
