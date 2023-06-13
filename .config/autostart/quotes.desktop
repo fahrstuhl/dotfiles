@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Quotes in New Tab
+Exec=bash -c 'cd ~/.quotes && python new_tab.py'
+Terminal=false
+Type=Application
