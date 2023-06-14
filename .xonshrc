@@ -3,7 +3,7 @@ $XONSH_COLOR_STYLE = 'solarized-light'
 $PROMPT = '{env_name}{BOLD_GREEN}@{hostname}{BOLD_BLUE} {cwd}{branch_color}{gitstatus: {}}{RESET} {BOLD_BLUE}{prompt_end}{RESET} '
 $fzf_history_binding = "c-r"  # Ctrl+R
 $fzf_file_binding = "c-t"      # Ctrl+T
-xontrib load fzf-widgets
+xontrib load fzf-widgets vox
 for bin in [p'~/bin', p'~/.local/bin', p'~/.cargo/bin']:
     if bin.exists() and not str(bin) in $PATH:
         $PATH.append(bin)
