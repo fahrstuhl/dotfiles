@@ -9,6 +9,7 @@
 
 import i3
 import re
+from subprocess import run
 
 class WorkspaceRenamer(object):
     
@@ -34,10 +35,10 @@ class WorkspaceRenamer(object):
     def interactiveRenameCurrentWorkspace(self):
         prefix = self.getWorkspacePrefix()
         renameCommand = 'rename workspace to "{} %s"'.format(prefix)
-        inputCommand = """exec i3-input -F '{}' -P "Rename workspace to: {} " """.format(renameCommand, prefix)
+        inputCommand = ["i3-input", "-F", renameCommand, "-P", "Rename workspace to: {} ".format(prefix)]
         print(renameCommand)
         print(inputCommand)
-        i3.command(inputCommand)
+        run(inputCommand)
 
 def main():
     renamer = WorkspaceRenamer()
