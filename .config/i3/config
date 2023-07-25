@@ -98,7 +98,7 @@ set $ws4 "4:r"
 set $ws5 "5:t"
 set $ws6 "6:b"
 set $ws7 "7:m"
-set $ws8 "8:comma"
+set $ws8 "8:,"
 set $ws9 "9:."
 set $ws10 "10:j"
 
