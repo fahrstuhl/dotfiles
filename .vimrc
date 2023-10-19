@@ -35,6 +35,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'easymotion/vim-easymotion'
+Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'justinmk/vim-syntax-extra'
@@ -250,3 +251,4 @@ nnoremap <leader>r :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
 
 let g:indent_guides_enable_on_vim_startup = 1
+let g:better_whitespace_enabled=1
