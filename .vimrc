@@ -50,6 +50,7 @@ Plug 'python-rope/ropemode'
 Plug 'python-rope/ropevim'
 Plug 'nvie/vim-flake8'
 Plug 'wilywampa/vim-ipython'
+Plug 'psf/black', { 'branch': 'stable' }
 
 " Initialize plugin system
 call plug#end()
@@ -240,6 +241,7 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 nnoremap <leader>gd :YcmCompleter GoTo<CR> 
 nnoremap <leader>gi :YcmCompleter GoToImplementation<CR> 
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR> 
+nnoremap <leader>h :YcmCompleter GetHover<CR>
 " let g:ycm_semantic_triggers =  {
 "   \   'c,cpp,objc': [ 're!\w{3}', '_' ],
 "   \ }
@@ -254,3 +256,14 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:better_whitespace_enabled=1
 
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+let g:ycm_global_ycm_extra_conf = "~/.config/ycm_extra_conf.py"
+let g:ycm_language_server =
+  \ [
+  \   {
+  \     'name': 'python',
+  \     'cmdline': ['pylsp', '-vv'],
+  \     'filetypes': [ 'python' ]
+  \    }
+  \ ]
+
