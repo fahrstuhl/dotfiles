@@ -7,6 +7,6 @@ xontrib load fzf-widgets vox
 for bin in [p'~/bin', p'~/.local/bin', p'~/.cargo/bin']:
     if bin.exists() and not str(bin) in $PATH:
         $PATH.insert(0, bin)
-if 'NAME="Fedora' in p'/etc/os-release'.read_text():
+if p'/etc/os-release'.exists() and 'NAME="Fedora' in p'/etc/os-release'.read_text():
     aliases['vi'] = 'vimx'
     aliases['vim'] = 'vimx'
