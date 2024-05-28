@@ -1,5 +1,7 @@
 # workaround https://github.com/xonsh/xonsh/issues/4409
 __import__('warnings').filterwarnings('ignore', 'There is no current event loop', DeprecationWarning, 'prompt_toolkit.application.application')
+import sys
+from os.path import expanduser
 
 $XONSH_HISTORY_SIZE = '10 GB'
 $XONSH_COLOR_STYLE = 'solarized-light'
@@ -12,5 +14,10 @@ for bin in [p'~/bin', p'~/.local/bin', p'~/.cargo/bin']:
 if p'/etc/os-release'.exists() and 'NAME="Fedora' in p'/etc/os-release'.read_text():
     aliases['vi'] = 'vimx'
     aliases['vim'] = 'vimx'
+
+# wtf why is this not in site packages
+if not any([".local/lib" in p for p in sys.path]):
+    i = sys.version_info
+    sys.path.append(expanduser(f"~/.local/lib/python{i.major}.{i.minor}/site-packages"))
 
 xontrib load fzf-widgets vox
