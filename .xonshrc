@@ -15,6 +15,9 @@ if p'/etc/os-release'.exists() and 'NAME="Fedora' in p'/etc/os-release'.read_tex
     aliases['vi'] = 'vimx'
     aliases['vim'] = 'vimx'
 
+if p'/etc/qubes-rpc/qubes.SshAgent'.exists():
+    $SSH_AUTH_SOCK="/home/user/.SSH_AGENT_vault"
+
 # wtf why is this not in site packages
 if not any([".local/lib" in p for p in sys.path]):
     i = sys.version_info
