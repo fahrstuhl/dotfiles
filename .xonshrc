@@ -15,7 +15,7 @@ if p'/etc/os-release'.exists() and 'NAME="Fedora' in p'/etc/os-release'.read_tex
     aliases['vi'] = 'vimx'
     aliases['vim'] = 'vimx'
 
-if p'/etc/qubes-rpc/qubes.SshAgent'.exists():
+if p'/rw/config/rc.local'.exists() and "# SPLIT SSH CONFIGURATION >>>" in p'/rw/config/rc.local'.read_text():
     $SSH_AUTH_SOCK="/home/user/.SSH_AGENT_vault"
 
 # wtf why is this not in site packages
