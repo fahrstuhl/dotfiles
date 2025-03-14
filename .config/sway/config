@@ -1,0 +1,244 @@
+input * {
+    xkb_layout "de"
+xkb_variant "neo"
+}
+
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+font pango:Noto Sans Mono 10
+
+default_border pixel 1
+hide_edge_borders --i3 smart
+focus_follows_mouse yes
+workspace_auto_back_and_forth yes
+
+focus_on_window_activation urgent
+workspace_layout tabbed
+
+# Home row direction keys, like vim
+set $up l
+set $down a
+set $left i
+set $right e
+# Your preferred terminal emulator
+# Recommends: foot
+set $term $TERMINAL
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+# Recommends: rofi-wayland
+set $rofi_cmd rofi \
+        -terminal '$term'
+# Shows a combined list of the applications with desktop files and
+# executables from PATH.
+# TODO: add window with the next release of rofi-wayland
+set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# Requires: desktop-backgrounds-compat, swaybg
+output * bg /usr/share/backgrounds/default.png fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+x kill
+    bindsym $mod+Ctrl+x kill
+
+    # Start your launcher
+    bindsym $mod+u exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+Ctrl+c reload
+
+    bindsym $mod+Shift+Ctrl+r reload
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+Ctrl+k exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    bindsym $mod+Ctrl+$left move left
+    bindsym $mod+Ctrl+$down move down
+    bindsym $mod+Ctrl+$up move up
+    bindsym $mod+Ctrl+$right move right
+    bindsym $mod+Shift+Ctrl+$left move workspace to output left
+    bindsym $mod+Shift+Ctrl+$down move workspace to output down
+    bindsym $mod+Shift+Ctrl+$up move workspace to output up
+    bindsym $mod+Shift+Ctrl+$right move workspace to output right
+#
+# Workspaces:
+#
+    set $ws1 "1:s"
+    set $ws2 "2:d"
+    set $ws3 "3:n"
+    set $ws4 "4:r"
+    set $ws5 "5:t"
+    set $ws6 "6:b"
+    set $ws7 "7:m"
+    set $ws8 "8:,"
+    set $ws9 "9:."
+    set $ws10 "10:j"
+
+    # switch to workspace
+    bindsym $mod+s workspace number $ws1
+    bindsym $mod+d workspace number $ws2
+    bindsym $mod+n workspace number $ws3
+    bindsym $mod+r workspace number $ws4
+    bindsym $mod+t workspace number $ws5
+    bindsym $mod+b workspace number $ws6
+    bindsym $mod+m workspace number $ws7
+    bindsym $mod+comma workspace number $ws8
+    bindsym $mod+period workspace number $ws9
+    bindsym $mod+j workspace number $ws10
+
+    # move focused container to workspace
+    bindsym $mod+Shift+s move container to workspace number $ws1
+    bindsym $mod+Shift+d move container to workspace number $ws2
+    bindsym $mod+Shift+n move container to workspace number $ws3
+    bindsym $mod+Shift+r move container to workspace number $ws4
+    bindsym $mod+Shift+t move container to workspace number $ws5
+    bindsym $mod+Shift+b move container to workspace number $ws6
+    bindsym $mod+Shift+m move container to workspace number $ws7
+    bindsym $mod+Shift+comma move container to workspace number $ws8
+    bindsym $mod+Shift+period move container to workspace number $ws9
+    bindsym $mod+Shift+j move container to workspace number $ws10
+    
+    bindsym $mod+Ctrl+s move container to workspace number $ws1
+    bindsym $mod+Ctrl+d move container to workspace number $ws2
+    bindsym $mod+Ctrl+n move container to workspace number $ws3
+    bindsym $mod+Ctrl+r move container to workspace number $ws4
+    bindsym $mod+Ctrl+t move container to workspace number $ws5
+    bindsym $mod+Ctrl+b move container to workspace number $ws6
+    bindsym $mod+Ctrl+m move container to workspace number $ws7
+    bindsym $mod+Ctrl+comma move container to workspace number $ws8
+    bindsym $mod+Ctrl+period move container to workspace number $ws9
+    bindsym $mod+Ctrl+j move container to workspace number $ws10
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+g layout toggle split
+    bindsym $mod+Tab layout toggle splith splitv tabbed
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+p focus parent
+    bindsym $mod+c focus child
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+y move scratchpad
+    bindsym $mod+Ctrl+y move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+y scratchpad show
+
+# Include configs from 3 locations:
+#  - /usr/share/sway/config.d
+#  - /etc/sway/config.d
+#  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
+#
+# If multiple directories contain the files with the same name, the later
+# directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
+# will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
+# or `/etc/sway/config.d/20-swayidle.conf`
+#
+# This mechanism permits overriding our default configuration per-system
+# (/etc) or per-user ($XDG_CONFIG_HOME) basis. Just create the file you
+# want to modify/override in the higher-level directory.
+#
+# For example, to disable the default bar from Fedora configs, you'll need to
+#     $ echo -n > "$HOME/.config/sway/config.d/90-bar.conf"
+#
+# Note the quoting, the $() and the arguments quoting. All the parts are equally
+# important to make the magic work. And if you want to learn the secret behind
+# the trick, it's all in the `wordexp(3)`.
+#
+include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
