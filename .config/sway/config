@@ -109,6 +109,9 @@ output eDP-1 scale 2
     bindsym $mod+Shift+Ctrl+r reload
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+Ctrl+k exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Lock session
+    bindsym $mod+Shift+Ctrl+z exec loginctl lock-session
 #
 # Moving around:
 #
