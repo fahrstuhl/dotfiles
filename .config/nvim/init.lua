@@ -299,6 +299,10 @@ require'fzf-lua'.setup{
 		},
 	},
 }
+vim.keymap.set('n', '<leader>f', '<cmd>FzfLua files<cr>', opts)
+vim.keymap.set('n', '<leader>r', '<cmd>FzfLua live_grep<cr>', opts)
+vim.keymap.set('n', '<leader>b', '<cmd>FzfLua buffers<cr>', opts)
+
 require'nvim-treesitter.configs'.setup {
 	auto_install = true,
 	indent = {
