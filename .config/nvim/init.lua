@@ -245,6 +245,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- Put diagnostics in virtual lines below the error
+vim.diagnostic.config({
+  virtual_lines = true
+})
+
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
