@@ -28,6 +28,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
+vim.opt.winborder = 'rounded'
 -- split below and right, how is this not the intuitive way
 vim.opt.splitright = true
 vim.opt.splitbelow = true
