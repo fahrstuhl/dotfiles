@@ -112,6 +112,7 @@ output eDP-1 scale 2
 
     # Lock session
     bindsym $mod+Shift+Ctrl+z exec loginctl lock-session
+    bindsym $mod+q exec swaywsrename
 #
 # Moving around:
 #
