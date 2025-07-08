@@ -32,6 +32,7 @@ vim.opt.winborder = 'rounded'
 -- split below and right, how is this not the intuitive way
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.winborder = 'rounded'
 
 -- folding
 vim.opt.foldmethod = 'expr'
@@ -82,6 +83,7 @@ require("lazy").setup({
 		{'hiphish/rainbow-delimiters.nvim'},
 		{'AndrewRadev/linediff.vim'},
 		{'farmergreg/vim-lastplace'},
+		{'mfussenegger/nvim-dap'},
 		{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 		{
 			"lukas-reineke/indent-blankline.nvim",
@@ -109,6 +111,7 @@ require("lazy").setup({
 				'hrsh7th/cmp-nvim-lsp',
 				'hrsh7th/cmp-buffer',
 				'hrsh7th/cmp-path',
+				'hrsh7th/cmp-nvim-lsp-signature-help',
 				'hrsh7th/cmp-cmdline',
 				'hrsh7th/nvim-cmp',
 			},
@@ -121,10 +124,10 @@ require("lazy").setup({
 			-- dependencies = { "echasnovski/mini.icons" },
 			opts = {}
 		},
-		-- {
-		-- 	"3rd/image.nvim",
-		-- 	opts = {}
-		-- },
+		{
+			"3rd/image.nvim",
+			opts = {}
+		},
 	},
 	rocks = {
 		hererocks = true,  -- recommended if you do not have global installation of Lua 5.1.
@@ -137,9 +140,9 @@ require("lazy").setup({
 })
 
 local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 local cmp = require'cmp'
@@ -206,43 +209,47 @@ cmp.setup.cmdline(':', {
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'LSP actions',
-  callback = function(event)
-    local opts = {buffer = event.buf}
+	desc = 'LSP actions',
+	callback = function(event)
+		local opts = {buffer = event.buf}
 
-    -- Display documentation of the symbol under the cursor
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+		-- Display documentation of the symbol under the cursor
+		vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+		vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+		vim.keymap.set('i', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
 
-    -- Jump to the definition
-    vim.keymap.set('n', 'gd', function() vim.cmd([[split]]) vim.lsp.buf.definition() end, opts)
+		-- Jump to the definition
+		vim.keymap.set('n', 'gd', '<cmd>FzfLua lsp_definitions<cr>', opts)
 
-    -- Format current file
-    vim.keymap.set({'n', 'x'}, 'gq', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+		-- Format current file
+		vim.keymap.set({'n', 'x'}, 'gq', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
 
-    -- Displays a function's signature information
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.keymap.set('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+		-- Displays a function's signature information
+		vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+		vim.keymap.set('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+		vim.keymap.set('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
-    -- Jump to declaration
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+		-- Jump to declaration
+		vim.keymap.set('n', 'gD', '<cmd>FzfLua lsp_declarations<cr>', opts)
 
-    -- Lists all the implementations for the symbol under the cursor
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+		-- Lists all the implementations for the symbol under the cursor
+		vim.keymap.set('n', 'gi', '<cmd>FzfLua lsp_implementations<cr>', opts)
 
-    -- Jumps to the definition of the type symbol
-    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+		-- Jumps to the definition of the type symbol
+		vim.keymap.set('n', 'go', '<cmd>FzfLua lsp_typedefs<cr>', opts)
 
-    -- Lists all the references
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+		-- Lists all the references
+		vim.keymap.set('n', '<leader>c', '<cmd>FzfLua lsp_finder<cr>', opts)
 
-    -- Renames all references to the symbol under the cursor
-    vim.keymap.set('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+		-- Renames all references to the symbol under the cursor
+		vim.keymap.set('n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 
-    -- Selects a code action available at the current cursor position
-    vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-    vim.keymap.set('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
-    vim.keymap.set('n', '<leader>lL', '<cmd>lua vim.lsp.codelens.refresh()<cr>', opts)
-  end,
+		-- Selects a code action available at the current cursor position
+		vim.keymap.set('n', '<leader>la', '<cmd>FzfLua lsp_code_actions<cr>', opts)
+		vim.keymap.set('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
+		vim.keymap.set('n', '<leader>lL', '<cmd>lua vim.lsp.codelens.refresh()<cr>', opts)
+		vim.keymap.set('n', '<leader>i', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<cr>', opts)
+	end,
 })
 
 -- Put diagnostics in virtual lines below the error
@@ -253,10 +260,49 @@ vim.diagnostic.config({
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.rust_analyzer.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.pylsp.setup{
+vim.lsp.enable('bashls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('gopls')
+vim.lsp.config('gopls', {
+	settings = {
+		gopls = {
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
+})
+-- automatically format go code and sort imports
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    local params = vim.lsp.util.make_range_params()
+    params.context = {only = {"source.organizeImports"}}
+    -- buf_request_sync defaults to a 1000ms timeout. Depending on your
+    -- machine and codebase, you may want longer. Add an additional
+    -- argument after params if you find that you have to write the file
+    -- twice for changes to be saved.
+    -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+    for cid, res in pairs(result or {}) do
+      for _, r in pairs(res.result or {}) do
+        if r.edit then
+          local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+          vim.lsp.util.apply_workspace_edit(r.edit, enc)
+        end
+      end
+    end
+    vim.lsp.buf.format({async = false})
+  end
+})
+vim.lsp.enable('pylsp')
+vim.lsp.config('pylsp', {
 	plugins = {
 		ruff = {
 			enabled = true,
@@ -271,8 +317,9 @@ require'lspconfig'.pylsp.setup{
 			enabled = true,
 		},
 	}
-}
-require'lspconfig'.yamlls.setup{
+})
+vim.lsp.enable('yamlls')
+vim.lsp.config('yamlls', {
 	settings = {
 		yaml = {
 			schemas = {
@@ -292,9 +339,16 @@ require'lspconfig'.yamlls.setup{
 			}
 		}
 	}
-}
+})
 
 require'fzf-lua'.setup{
+	"ivy",
+	winopts ={
+		preview = {
+			layout = "vertical"
+		},
+		split = "belowright new"  -- open in split below current window
+	},
 	previewers = {
 		builtin = {
 			extensions = {
@@ -304,10 +358,16 @@ require'fzf-lua'.setup{
 			},   
 		},
 	},
+	lsp = {
+		jump1 = false,
+	},
 }
+require'fzf-lua'.register_ui_select()
 vim.keymap.set('n', '<leader>f', '<cmd>FzfLua files<cr>', opts)
 vim.keymap.set('n', '<leader>r', '<cmd>FzfLua live_grep<cr>', opts)
 vim.keymap.set('n', '<leader>b', '<cmd>FzfLua buffers<cr>', opts)
+vim.keymap.set('n', '<leader>y', '<cmd>FzfLua registers<cr>', opts)
+vim.keymap.set('n', '<leader>l', '<cmd>FzfLua<cr>', opts)
 
 require'nvim-treesitter.configs'.setup {
 	auto_install = true,
@@ -318,3 +378,14 @@ require'nvim-treesitter.configs'.setup {
 		enabled = true,
 	},
 }
+
+vim.diagnostic.config({
+  -- Use the default configuration
+  virtual_lines = true
+
+  -- Alternatively, customize specific options
+  -- virtual_lines = {
+  --  -- Only show virtual line diagnostics for the current cursor line
+  --  current_line = true,
+  -- },
+})
