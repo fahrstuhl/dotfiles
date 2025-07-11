@@ -212,7 +212,7 @@ output eDP-1 scale 2
     bindsym $mod+c focus child
 
     # Resize outermost containers to fit ultrawide screen
-    bindsym $mod+z exec swaytrawide
+    bindsym $mod+z exec "swaytrawide -r $TERMINAL"
 #
 # Scratchpad:
 #
