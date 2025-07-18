@@ -84,6 +84,7 @@ require("lazy").setup({
 		{'AndrewRadev/linediff.vim'},
 		{'farmergreg/vim-lastplace'},
 		{'mfussenegger/nvim-dap'},
+		{'RaafatTurki/hex.nvim'},
 		{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 		{
 			"lukas-reineke/indent-blankline.nvim",
@@ -124,14 +125,14 @@ require("lazy").setup({
 			-- dependencies = { "echasnovski/mini.icons" },
 			opts = {}
 		},
-		{
-			"3rd/image.nvim",
-			opts = {}
-		},
+		-- {
+		-- 	"3rd/image.nvim",
+		-- 	opts = {}
+		-- },
 	},
-	rocks = {
-		hererocks = true,  -- recommended if you do not have global installation of Lua 5.1.
-	},
+	-- rocks = {
+	-- 	hererocks = true,  -- recommended if you do not have global installation of Lua 5.1.
+	-- },
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
 	install = {},
@@ -389,3 +390,5 @@ vim.diagnostic.config({
   --  current_line = true,
   -- },
 })
+
+require'hex'.setup()
