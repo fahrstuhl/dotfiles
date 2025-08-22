@@ -1,0 +1,48 @@
+profile homedock {
+	output eDP-1 disable
+	output 'Samsung Electric Company C49RG9x H1AK500000' mode 5120x1440 position 0,0
+}
+
+profile homehdmi {
+	output eDP-1 disable
+	output 'Samsung Electric Company C49RG9x HNTR100512' mode 5120x1440 position 0,0
+}
+
+profile standalone {
+	output eDP-1 enable transform normal
+}
+
+profile drawing {
+	output eDP-1 enable transform 90
+}
+
+profile homedrawing {
+	output eDP-1 disable
+	output 'Samsung Electric Company C49RG9x H1AK500000' mode 5120x1440 position 0,0
+	output 'HAT Kamvas 13 L56051794302' mode 1920x1080 position 1600,1440 transform normal
+}
+
+profile homedrawingportrait {
+	output eDP-1 disable
+	output 'Samsung Electric Company C49RG9x H1AK500000' mode 5120x1440 position 0,0
+	output 'HAT Kamvas 13 L56051794302' mode 1920x1080 position 2020,1440 transform 270
+}
+profile standalonedrawing {
+	output eDP-1 enable transform normal
+	output 'HAT Kamvas 13 L56051794302' mode 1920x1080 position -320,800 transform normal
+}
+
+profile standalonedrawingportrait {
+	output eDP-1 enable transform normal
+	output 'HAT Kamvas 13 L56051794302' mode 1920x1080 position 100,800 transform 270
+}
+
+profile rokid {
+	output eDP-1 disable
+	output 'LBT Rokid Max Unknown' mode 1920x1080 position 0,0
+}
+
+profile minipc {
+	output HDMI-A-1 disable
+	output 'Samsung Electric Company C49RG9x H1AK500000' mode 5120x1440 position 0,0
+}
