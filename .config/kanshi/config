@@ -3,9 +3,24 @@ profile homedock {
 	output 'Samsung Electric Company C49RG9x H1AK500000' mode 5120x1440 position 0,0
 }
 
+profile homedockhalf {
+	output eDP-1 enable position 640,1440
+	output 'Samsung Electric Company C49RG9x H1AK500000' mode 2560x1440 position 0,0
+}
+
 profile homehdmi {
 	output eDP-1 disable
 	output 'Samsung Electric Company C49RG9x HNTR100512' mode 5120x1440 position 0,0
+}
+
+profile homehdmihalf {
+	output eDP-1 enable position 640,1440
+	output 'Samsung Electric Company C49RG9x HNTR100512' mode 2560x1440 position 0,0
+}
+
+profile homelaptopdrawing {
+	output 'Samsung Electric Company C49RG9x HNTR100512' mode 5120x1440 position 0,0
+	output eDP-1 enable position 1920,1440
 }
 
 profile standalone {
