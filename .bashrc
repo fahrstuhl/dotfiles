@@ -42,6 +42,8 @@ completions=(
   go
   k9s
   timew
+  bin
+  argocd
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
