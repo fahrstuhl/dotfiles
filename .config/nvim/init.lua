@@ -262,6 +262,7 @@ vim.diagnostic.config({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 vim.lsp.enable('bashls')
+vim.lsp.enable('clangd')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('gopls')
 vim.lsp.config('gopls', {
