@@ -85,7 +85,18 @@ require("lazy").setup({
 		{'farmergreg/vim-lastplace'},
 		{'mfussenegger/nvim-dap'},
 		{'RaafatTurki/hex.nvim'},
+		{'stevearc/vim-arduino'},
+		{'folke/which-key.nvim'},
+		{'ledger/vim-ledger'},
 		{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+		{
+			"teamtype/teamtype-nvim",
+			keys = {
+				{ "<leader>ej", "<cmd>TeamtypeJumpToCursor<cr>" },
+				{ "<leader>ef", "<cmd>TeamtypeFollow<cr>" },
+			},
+			lazy = false,
+		},
 		{
 			"lukas-reineke/indent-blankline.nvim",
 			main = "ibl",
@@ -303,23 +314,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({async = false})
   end
 })
-vim.lsp.enable('pylsp')
-vim.lsp.config('pylsp', {
-	plugins = {
-		ruff = {
-			enabled = true,
-		},
-		jedi_completion = {
-			enabled = true,
-		},
-		black = {
-			enabled = true,
-		},
-		pylsp_mypy = {
-			enabled = true,
-		},
-	}
-})
+vim.lsp.enable('ty')
 vim.lsp.enable('yamlls')
 vim.lsp.config('yamlls', {
 	settings = {
