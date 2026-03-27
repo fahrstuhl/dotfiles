@@ -215,6 +215,9 @@ for_window [app_id="com.bitwarden.desktop"] floating enable
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
+    # Toggle the current window to show on all workspaces
+    bindsym $mod+Shift+Ctrl+space sticky toggle
+
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
