@@ -16,6 +16,7 @@
         "sway/window"
     ],
     "modules-right": [
+        "custom/statusmate",
         "idle_inhibitor",
         "pulseaudio",
         "temperature",
@@ -24,6 +25,11 @@
         "clock",
         "tray"
     ],
+    "custom/statusmate": {
+        "exec": "statusmate",
+        "interval": 1,
+        "return-type": "json"
+    },
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}"
