@@ -82,6 +82,7 @@ output eDP-1 scale 2
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "9580:109:HUION_Huion_Tablet_GS1331_Stylus" map_to_output 'HAT Kamvas 13 L56051794302'
+input "9580:109:HUION_Huion_Tablet_GS1331_Pen" map_to_output 'HAT Kamvas 13 L56051794302'
 input "9580:109:HUION_Huion_Tablet_GS1331" map_to_output 'HAT Kamvas 13 L56051794302'
 input "10182:275:GXTP7385:00_27C6:0113_Stylus" map_to_output 'Japan Display Inc. GPD1001H 0x00000001'
 input "10182:275:GXTP7385:00_27C6:0113" map_to_output 'Japan Display Inc. GPD1001H 0x00000001'
@@ -91,6 +92,7 @@ for_window [app_id="dingsda"] floating enable
 for_window [app_id="authenticator"] floating enable
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable
 for_window [app_id="com.bitwarden.desktop"] floating enable
+for_window [app_id="lxqt-openssh-askpass"] floating enable
 
 ### Key bindings
 #
